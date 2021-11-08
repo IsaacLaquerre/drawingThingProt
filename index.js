@@ -19,8 +19,8 @@ var lines = [];
 
 function mouseMoved(e) {
     mouseCoords = {
-        x: e.clientX,
-        y: e.clientY
+        x: e.clientX - offsets.x,
+        y: e.clientY - offsets.y
     };
 
     if (coords.length === 0) return;
@@ -35,7 +35,7 @@ function mouseMoved(e) {
         case "line":
             lines.push({
                 mode: "line",
-                path: [coords[0][0], coords[0][1], mouseCoords.x - offsets.x, mouseCoords.y - offsets.y],
+                path: [coords[0][0], coords[0][1], mouseCoords.x, mouseCoords.y],
                 width: lineWidth,
                 color: "rgba(150, 150, 150, 0.75)",
                 temp: true
@@ -44,7 +44,7 @@ function mouseMoved(e) {
         case "circle":
             lines.push({
                 mode: "circle",
-                path: [coords[0][0], coords[0][1], Math.abs((mouseCoords.x - offsets.x - coords[0][0]) + (mouseCoords.y - offsets.y - coords[0][1])) / 2],
+                path: [coords[0][0], coords[0][1], Math.abs((mouseCoords.x - coords[0][0]) + (mouseCoords.y - coords[0][1])) / 2],
                 width: lineWidth,
                 color: "rgba(150, 150, 150, 0.75)",
                 temp: true
@@ -53,7 +53,7 @@ function mouseMoved(e) {
         case "rectangle":
             lines.push({
                 mode: "rectangle",
-                path: [coords[0][0], coords[0][1], (mouseCoords.x - offsets.x - coords[0][0]), (mouseCoords.y - offsets.y - coords[0][1])],
+                path: [coords[0][0], coords[0][1], (mouseCoords.x - coords[0][0]), (mouseCoords.y - coords[0][1])],
                 width: lineWidth,
                 color: "rgba(150, 150, 150, 0.75)",
                 temp: true
@@ -63,7 +63,7 @@ function mouseMoved(e) {
             if (isDown) {
                 lines.push({
                     mode: "free",
-                    path: [mouseCoords.x - offsets.x, mouseCoords.y - offsets.y],
+                    path: [mouseCoords.x, mouseCoords.y],
                     width: lineWidth,
                     color: color,
                 });
