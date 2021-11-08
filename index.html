@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/index.js" defer></script>
+    <title>Document</title>
+
+    <style>
+        canvas {
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: 37vw;
+            display: inline-block;
+            cursor: crosshair;
+        }
+        
+        #drawingModes {
+            position: absolute;
+            right: 32vw;
+            top: 0;
+            display: inline-block;
+            width: 75px;
+        }
+        
+        .center {
+            text-align: center;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="500" height="500" style="border: 1px solid #000000;" onmousedown="mouseEvent(event);" onmouseup="mouseEvent(event);" onmousemove="mouseMoved(event);" onmouseout="coords = [];"></canvas>
+    <div id="drawingModes">
+        <label style="font-size: 15pt;">Mode</label>
+        <select style="height: 25px; width: 90px; font-size: 11pt;" onchange="selectMode(this.value);">
+            <option id="line" value="line" selected>Line</option>
+            <option id="circle" value="circle">Circle</option>
+            <option id="rectangle" value="rectangle">Rectangle</option>
+            <option id="free" value="free">Free</option>
+        </select>
+        <label for="color" style="font-size: 15pt;">Color</label>
+        <input id="color" type="color" name="color" value="#000000" oninput="changeColor(this);">
+    </div>
+    <button onclick="clearCanvas();">Clear</button>
+    <br/>
+    <div class="lineWithWrapper center" style="position: relative;">
+        <label id="lineWidthDisplay" for="lineWidth">1</label>
+        <input id="lineWidth" style="line-height: 5px; position: relative;" name="lineWidth" type="range" value="1" min="1" max="10" oninput="changeWidth(this.value);">
+        <div id="lineWidthDiv" style="width: 3px; height: 3px; background-color: black; display: inline-block; vertical-align: middle; margin-left: 5px; position: absolute; top: 10.25px;"></div>
+    </div>
+
+</body>
+
+</html>
